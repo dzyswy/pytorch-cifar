@@ -16,6 +16,9 @@ foreach(SOURCE_FILE ${TEST_SRCS})
     add_executable(${NAME} ${SOURCE_FILE})
     target_link_libraries(${NAME} ${ALL_LIBS})
 
+    get_property(DIRS TARGET ${NAME} PROPERTY INCLUDE_DIRECTORIES)
+    message(STATUS "Include directories for ${NAME}: ${DIRS}")
+
 
     # install
     install(TARGETS ${NAME} DESTINATION bin)
