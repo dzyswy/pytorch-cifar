@@ -56,15 +56,16 @@ targets_idx = {
     9: 'truck',
 }
 
-root_dir = 'test_CIFAR_10'
-obj_dir = 'test7.png'
+root_dir = '../data/'
+obj_dir = 'test4.png'
 
 img_dir = os.path.join(root_dir, obj_dir)
 img = Image.open(img_dir)
 
 pre_process = torchvision.transforms.Compose([
     torchvision.transforms.Resize(size=(32, 32)),
-    torchvision.transforms.ToTensor()
+    torchvision.transforms.ToTensor(),
+    torchvision.transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
 ])
 
 img = pre_process(img)
@@ -75,25 +76,26 @@ mynet = torch.load('CIFAR_10_20.pth', map_location=torch.device('cpu'))
 mynet.eval()
 
 output = mynet(img)
+print(output)
 print(targets_idx[output.argmax(axis=1).item()])
 
 
-# 创建一个随机输入张量
-dummy_input = torch.randn(1, 3, 32, 32)
-
-# 指定动态轴，这里我们假设batch size是动态的
-dynamic_axes = {'input': {0: 'batch_size'}, 'output': {0: 'batch_size'}}
-
-# 导出模型
-torch.onnx.export(mynet,         # 模型 being run
-                  dummy_input,   # 模型输入 (or a tuple for multiple inputs)
-                  "CIFAR_10_20.onnx",      # 导出的文件名 (can be a file or file-like object)
-                  export_params=True,  # 是否存储模型参数
-                  opset_version=12,    # ONNX版本
-                  do_constant_folding=True,  # 是否执行常量折叠优化
-                  input_names=['input'],   # 输入的名称
-                  output_names=['output'],  # 输出的名称
-                  dynamic_axes=dynamic_axes)
-
-print("模型已导出为ONNX格式")
-
+# # 创建一个随机输入张量
+# dummy_input = torch.randn(1, 3, 32, 32)
+#
+# # 指定动态轴，这里我们假设batch size是动态的
+# dynamic_axes = {'input': {0: 'batch_size'}, 'output': {0: 'batch_size'}}
+#
+# # 导出模型
+# torch.onnx.export(mynet,         # 模型 being run
+#                   dummy_input,   # 模型输入 (or a tuple for multiple inputs)
+#                   "CIFAR_10_20.onnx",      # 导出的文件名 (can be a file or file-like object)
+#                   export_params=True,  # 是否存储模型参数
+#                   opset_version=12,    # ONNX版本
+#                   do_constant_folding=True,  # 是否执行常量折叠优化
+#                   input_names=['input'],   # 输入的名称
+#                   output_names=['output'],  # 输出的名称
+#                   dynamic_axes=dynamic_axes)
+#
+# print("模型已导出为ONNX格式")
+#

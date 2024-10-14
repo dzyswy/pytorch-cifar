@@ -12,7 +12,7 @@ train_loss = []
 test_loss = []
 
 # 训练集
-train_data_set = torchvision.datasets.CIFAR10(root='dataset', train=True, transform=torchvision.transforms.Compose([
+train_data_set = torchvision.datasets.CIFAR10(root='../dataset', train=True, transform=torchvision.transforms.Compose([
     torchvision.transforms.RandomCrop(size=(32, 32), padding=4),
     torchvision.transforms.RandomHorizontalFlip(),
     torchvision.transforms.ToTensor(),
@@ -20,7 +20,7 @@ train_data_set = torchvision.datasets.CIFAR10(root='dataset', train=True, transf
 ]), download=True)
 
 # 测试集
-test_data_set = torchvision.datasets.CIFAR10(root='dataset', train=False, transform=torchvision.transforms.Compose([
+test_data_set = torchvision.datasets.CIFAR10(root='../dataset', train=False, transform=torchvision.transforms.Compose([
     torchvision.transforms.RandomCrop(size=(32, 32), padding=4),
     torchvision.transforms.RandomHorizontalFlip(),
     torchvision.transforms.ToTensor(),
