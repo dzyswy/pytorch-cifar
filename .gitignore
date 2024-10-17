@@ -164,5 +164,11 @@ cython_debug/
 *.onnx
 /dataset/cifar-10-python.tar.gz
 /dataset/cifar-10-batches-py
-/dataset/imagenet-sample-images
-/ncnn/model
+/dataset/imagenet-sample-images 
+/ncnn/model/CIFAR_10_20-int8.bin
+/ncnn/model/CIFAR_10_20-int8.param
+/ncnn/model/CIFAR_10_20-opt.bin
+/ncnn/model/CIFAR_10_20-opt.param
+/ncnn/model/CIFAR_10_20.bin
+/ncnn/model/CIFAR_10_20.param
+/ncnn/model/CIFAR_10_20.table
